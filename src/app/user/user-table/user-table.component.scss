@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  ::ng-deep {
+    th, td {
+      border: 1px solid var(--color-border);
+      padding: var(--space-sm) var(--space-m);
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--color-surface);
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+
+    .status .badge {
+      width: min-content;
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-xs) var(--space-s);
+      border-radius: var(--radius-sm);
+      background-color: var(--color-primary-light);
+      color: var(--color-primary);
+
+      &.active {
+        background-color: color-mix(in srgb, var(--color-success) 15%, white);
+        color: var(--color-success);
+      }
+
+      &.inactive {
+        background-color: color-mix(in srgb, var(--color-danger) 15%, white);
+        color: var(--color-danger);
+      }
+    }
+
+    .actions {
+      width: 240px;
+    }
+  }
+}

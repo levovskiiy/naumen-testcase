@@ -1,0 +1,23 @@
+<div class="app-input">
+  @if (label()) {
+    <label class="label">
+      {{ label() }}
+    </label>
+  }
+
+  <div class="control">
+    <input
+      [type]="type()"
+      [attr.placeholder]="placeholder()"
+      [value]="value()"
+      (input)="onInput($event)"
+      class="inner-input"
+    />
+
+    @if (clearable() && value()) {
+      <button type="button" class="clear-control" (click)="clear()">
+        X
+      </button>
+    }
+  </div>
+</div>

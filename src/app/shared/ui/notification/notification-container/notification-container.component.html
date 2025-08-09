@@ -1,0 +1,5 @@
+<div class="notification-container">
+  @for (notification of elements(); track notification.id) {
+    <app-notification-item [data]="notification"/>
+  }
+</div>

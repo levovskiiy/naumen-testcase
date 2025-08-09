@@ -1,0 +1,76 @@
+<header class="page-header">
+  <h1>Пользователи</h1>
+  <app-button (click)="addUser()" [disabled]="!canCreateUser()">Создать пользователя</app-button>
+</header>
+
+<app-user-list-filters [form]="filterForms"/>
+
+<section class="list-section">
+  @if (hasFiltersValue() && users().length === 0) {
+    <p>По заданным фильтрам ничего не найдено</p>
+  } @else {
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Почта</th>
+        <th>Статус</th>
+        <th class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (loading()) {
+          <tr *appRepeat="5">
+            <td *appRepeat="4">
+              <app-skeleton/>
+            </td>
+          </tr>
+        } @else {
+          @for (user of users(); track user; let idx = $index) {
+            @let _isEditing = idx === editDataIndex() || user.id == null ;
+            <tr>
+              @if (_isEditing) {
+                <ng-container *ngTemplateOutlet="editMode"/>
+              } @else {
+                <ng-container *ngTemplateOutlet="viewMode"/>
+              }
+            </tr>
+            <ng-template #viewMode>
+              <td class="name">{{ user.name }}</td>
+              <td class="email">{{ user.email }}</td>
+              <td class="status">
+                <div class="badge" [class]="user.status">
+                  {{ statusTitleMapping[user.status] }}
+                </div>
+              </td>
+              <td class="action">
+                <app-button appearance="ghost" (click)="editData(idx)" [disabled]="isCreating()">
+                  ✏️ Редактировать
+                </app-button>
+              </td>
+            </ng-template>
+
+            <ng-template #editMode>
+              <td class="name">
+                <app-input [formControl]="editUserForm.controls.name"/>
+              </td>
+              <td class="email">
+                <app-input [formControl]="editUserForm.controls.email"/>
+              </td>
+              <td class="status">
+                <app-select [options]="statusSelectItems" [formControl]="editUserForm.controls.status"/>
+              </td>
+              <td class="actions">
+                <app-button appearance="secondary" (click)="acceptEdit(idx)" [loading]="sending()">
+                  Сохранить
+                </app-button>
+                <app-button appearance="ghost" (click)="cancelEdit(idx)">Отмена</app-button>
+              </td>
+            </ng-template>
+          }
+        }
+      </tbody>
+    </table>
+  }
+
+</section>

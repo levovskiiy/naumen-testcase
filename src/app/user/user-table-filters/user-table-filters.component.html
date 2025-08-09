@@ -1,0 +1,12 @@
+<app-input
+  [formControl]="form().controls.name"
+  [clearable]="true"
+  label="Поиск по имени"
+/>
+
+<app-select
+  [formControl]="form().controls.status"
+  [options]="statusSelectOptions"
+  [clearable]="true"
+  label="Статус"
+/>

@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  pointer-events: auto;
+}
+
+.notification {
+  min-width: 200px;
+  max-height: 360px;
+  padding: var(--space-sm) var(--space-m);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  transform-origin: right top;
+  animation: in 240ms ease-out;
+
+  .message {
+    flex: 1;
+    padding-right: var(--space-s);
+  }
+
+  &.success {
+    background: var(--color-success);
+  }
+
+  &.error {
+    background: var(--color-danger);
+  }
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

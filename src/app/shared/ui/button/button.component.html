@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="button"
+  [class]="appearance()"
+  [class.loading]="loading()"
+  [attr.disabled]="disabled() ? true : null"
+>
+  @if (loading()) {
+    <span class="spinner">
+      <svg viewBox="0 0 50 50" width="16" height="16" aria-hidden="true" focusable="false">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4"/>
+      </svg>
+    </span>
+  }
+
+  <span class="content">
+    <ng-content/>
+  </span>
+</button>

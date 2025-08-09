@@ -1,0 +1,23 @@
+<div class="app-select">
+  @if (label()) {
+    <label class="label">{{ label() }}</label>
+  }
+
+  <div class="control">
+    <select (change)="onSelect($event)" class="inner-select">
+      @if (placeholder()) {
+        <option value="">{{ placeholder() }}</option>
+      }
+      @for (option of options(); track option.label; let idx = $index) {
+        <option [value]="idx" [selected]="options()[idx].value === value()">
+          {{ option.label }}
+        </option>
+      }
+      @if (clearable() && value()) {
+        <button type="button" class="clear" (click)="clear()">
+          X
+        </button>
+      }
+    </select>
+  </div>
+</div>
