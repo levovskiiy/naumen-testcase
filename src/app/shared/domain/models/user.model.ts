@@ -13,14 +13,6 @@ export class UserModel {
   public static create(options?: Partial<UserData>) {
     return new UserModel(options?.id ?? null, options?.name ?? '', options?.email ?? '', options?.status ?? UserStatus.active);
   }
-
-  public deactivate() {
-    this.status = UserStatus.inactive;
-  }
-
-  public activate() {
-    this.status = UserStatus.active;
-  }
 }
 
 interface UserData {
